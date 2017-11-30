@@ -1,0 +1,37 @@
+---
+- name: Ensure munin-node is installed (Debian).
+  apt: name=munin-node
+  register: installed
+
+- name: Copy munin-node configuration.
+  template:
+    src: munin-node.conf.j2
+    dest: /etc/munin/munin-node.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart munin-node
+
+- name: Generate plugin configuration.
+  template:
+    src: plugin-conf.j2
+    dest: /etc/munin/plugin-conf.d/ansible.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart munin-node
+
+- name: Deleting all existing plugin symlinks.
+  command: rm -f /etc/munin/plugins/*
+  when: installed.changed or munin_reset_plugins
+
+- name: Enabling defined plugins.
+  file:
+    path: "{{ munin_plugin_dest_path }}{{ item.name }}"
+    src: "{{ munin_plugin_src_path }}{{ item.plugin | default( item.name ) }}"
+    state: link
+  with_items: "{{ munin_node_plugins }}"
+  notify: restart munin-node
+
+- name: Ensure munin-node is running.
+  service: name=munin-node state=started enabled=yes
