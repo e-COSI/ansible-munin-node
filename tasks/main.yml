@@ -1,5 +1,5 @@
 ---
-- name: Ensure munin-node is installed (Debian).
+- name: Ensure munin-node is installed.
   apt: name=munin-node
   register: installed
 
@@ -21,8 +21,12 @@
     mode: 0644
   notify: restart munin-node
 
-- name: Deleting all existing plugin symlinks.
-  command: rm -f /etc/munin/plugins/*
+- name: Deleting plugins.
+  file: path=/etc/munin/plugins state=absent
+  when: installed.changed or munin_reset_plugins
+
+- name: Creating empty plugins directory.
+  file: path=/etc/munin/plugins state=directory owner=root group=root mode=0755
   when: installed.changed or munin_reset_plugins
 
 - name: Enabling defined plugins.

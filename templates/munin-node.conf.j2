@@ -51,7 +51,7 @@ allow {{ allowed_ip }}
 # *must* be provided, even if it's /32
 
 {% for cidr_allowed_ip in munin_node_cidr_allowed_ips %}
-cidr_allow {{ allowed_ip }}
+cidr_allow {{ cidr_allowed_ip }}
 {% endfor %}
 
 # Which address to bind to;
