@@ -4,6 +4,9 @@ munin_node_bind_port: "4949"
 
 munin_node_host_name: ''
 
+# Whether to delete all previous plugins before adding new symlinks.
+munin_reset_plugins: false
+
 # Munin requires IPs be added as regular expressions.
 munin_node_allowed_ips: []
 munin_node_cidr_allowed_ips:
