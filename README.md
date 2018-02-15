@@ -28,7 +28,7 @@ munin_node_allowed_ips: []
 ```
 List of enabled plugins, you should include 'name' field. If the name of the resulting plugin does not match the name of the munin plugin from which it is generated (as is the case, say, with the if_ plugin), you need to add a 'plugin' field to the list item, like so:
 ```
-munin_node_enabled_plugins:
+munin_node_plugins:
   - name: uptime
   - name: if_eth0
     plugin: if_

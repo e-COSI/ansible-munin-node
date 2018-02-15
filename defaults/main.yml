@@ -17,7 +17,7 @@ munin_plugin_src_path: /usr/share/munin/plugins/
 munin_plugin_dest_path: /etc/munin/plugins/
 
 # List of munin plugins to enable.
-munin_node_enabled_plugins: []
+munin_node_plugins: []
 
 # Plugin configuration options (the key is the plugin heading, items in the
 # array will be options for the plugin).
