@@ -12,10 +12,16 @@
     mode: 0644
   notify: restart munin-node
 
+- name: Remove prior plugin configuration
+  file:
+    path: "/etc/munin/plugin-conf.d/{{ item }}"
+    state: absent
+  with_items: munin_node_config_files_to_remove
+
 - name: Generate plugin configuration.
   template:
     src: plugin-conf.j2
-    dest: /etc/munin/plugin-conf.d/ansible.conf
+    dest: "/etc/munin/plugin-conf.d/{{ munin_node_ansible_config_filename }}"
     owner: root
     group: root
     mode: 0644

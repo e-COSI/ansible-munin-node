@@ -27,3 +27,12 @@ munin_node_config: {
   #   "env.name": "bash"
   # }
 }
+
+# Filename for generated plugins config
+# Beware : munin read conf files in alphabetical order, conf in last file is applied
+munin_node_ansible_config_filename: "zzz-ansible.conf"
+
+# Other config file in plugin-conf.d could bu removed, useful for idempotence whenre renaming
+# ansible_config_filename
+munin_node_config_files_to_remove:
+  - ansible.conf
