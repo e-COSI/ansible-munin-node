@@ -1,5 +1,6 @@
 galaxy_info:
-  author: Mykhaylo Kolesnik
+  author: Lionel Déglise
+  company: e-COSI
   description: Role for munin-node installation and configuration.
   license: MIT
 
@@ -10,6 +11,9 @@ galaxy_info:
       versions:
         - jessie
         - stretch
+    - name: Ubuntu
+      versions:
+      - all
 
   galaxy_tags:
     - server
