@@ -16,7 +16,7 @@
   file:
     path: "/etc/munin/plugin-conf.d/{{ item }}"
     state: absent
-  with_items: munin_node_config_files_to_remove
+  with_items: "{{ munin_node_config_files_to_remove }}"
 
 - name: Generate plugin configuration.
   template:
